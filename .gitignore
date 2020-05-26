@@ -14,7 +14,6 @@ google-services.json
 GoogleService-Info.plist
 IDEWorkspaceChecks.plist
 ios-release.bundle.map
-ios/Pods/
 keystores/
 
 # Code Coverage
@@ -67,7 +66,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -101,3 +99,6 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# CocoaPods
+/ios/Pods/
