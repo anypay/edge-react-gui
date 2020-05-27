@@ -1,8 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { ActivityIndicator, Text, TouchableHighlight, View } from 'react-native'
-import OpenAppSettings from 'react-native-app-settings'
+import { ActivityIndicator, Linking, Text, TouchableHighlight, View } from 'react-native'
 import { RNCamera } from 'react-native-camera'
 import { Actions } from 'react-native-router-flux'
 import slowlog from 'react-native-slowlog'
@@ -102,7 +101,7 @@ export class Scan extends Component<Props> {
   }
 
   openSettingsTapped = () => {
-    OpenAppSettings.open()
+    Linking.openSettings()
   }
 
   onBarCodeRead = (result: { data: string }) => {
