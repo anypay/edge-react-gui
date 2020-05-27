@@ -119,7 +119,7 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
-  - ReactNativeART (1.0.2):
+  - ReactNativeART (1.1.2):
     - React
   - ReactNativePermissions (1.0.6):
     - React
@@ -286,7 +286,7 @@ SPEC CHECKSUMS:
   react-native-smart-splash-screen: a961513689f11d63e8496684c2fa4be2d24fe23b
   react-native-tcp: ec39d0ce136873220a2895a0e89dc33804fe0def
   react-native-webview: 5036ed4a973ad1deeeff118262d2df7b60b3419d
-  ReactNativeART: 103929e284be663b5a2f921ed912821f04120a70
+  ReactNativeART: c580fba2f7d188d8fa4418ce78db8130654ed10f
   ReactNativePermissions: bf462424ca7823d1b8e6cb463184d6e7f151971b
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
   RNDeviceInfo: e7c5fcde13d40e161d8a27f6c5dc69c638936002
