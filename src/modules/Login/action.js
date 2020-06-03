@@ -1,7 +1,7 @@
 // @flow
 
 import { type EdgeAccount, type EdgeCurrencyInfo } from 'edge-core-js/types'
-import Locale from 'react-native-locale'
+// import Locale from 'react-native-locale'
 import { Actions } from 'react-native-router-flux'
 import { sprintf } from 'sprintf-js'
 
@@ -29,7 +29,7 @@ import {
 } from '../Core/Account/settings.js'
 import { updateWalletsEnabledTokens, updateWalletsRequest } from '../Core/Wallets/action.js'
 
-const localeInfo = Locale.constants() // should likely be moved to login system and inserted into Redux
+// const localeInfo = Locale.constants() // should likely be moved to login system and inserted into Redux
 
 function getFirstActiveWalletInfo(account: EdgeAccount): { walletId: string, currencyCode: string } {
   // Find the first wallet:
@@ -88,11 +88,11 @@ export const initializeAccount = (account: EdgeAccount, touchIdInfo: Object) => 
   }
   try {
     let newAccount = false
-    let defaultFiat = Constants.USD_FIAT
+    const defaultFiat = Constants.USD_FIAT
     if (account.activeWalletIds.length < 1) {
-      if (localeInfo.currencyCode && typeof localeInfo.currencyCode === 'string' && localeInfo.currencyCode.length >= 3) {
-        defaultFiat = localeInfo.currencyCode
-      }
+      // if (localeInfo.currencyCode && typeof localeInfo.currencyCode === 'string' && localeInfo.currencyCode.length >= 3) {
+      //   defaultFiat = localeInfo.currencyCode
+      // }
 
       newAccount = true
     } else {

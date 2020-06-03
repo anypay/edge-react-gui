@@ -1,7 +1,7 @@
 // @flow
 /* global __DEV__ */
 
-import { Client } from 'bugsnag-react-native'
+// import { Client } from 'bugsnag-react-native'
 import React from 'react'
 import { Platform, StatusBar, Text, TextInput } from 'react-native'
 import RNFS from 'react-native-fs'
@@ -21,7 +21,7 @@ const ENABLE_WHY_DID_YOU_UPDATE = false
 const ENABLE_PERF_LOGGING = false
 const PERF_LOGGING_ONLY = false
 
-global.bugsnag = new Client(ENV.BUGSNAG_API_KEY)
+// global.bugsnag = new Client(ENV.BUGSNAG_API_KEY)
 
 const perfTimers = {}
 const perfCounters = {}

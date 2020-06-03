@@ -3,39 +3,15 @@ package co.edgesecure.app;
 import android.app.Application;
 import android.content.Context;
 import android.webkit.WebView;
-import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
-import cl.json.RNSharePackage;
-import co.airbitz.AbcCoreJsUi.AbcCoreJsUiPackage;
-import co.airbitz.fastcrypto.RNFastCryptoPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.bitgo.randombytes.RandomBytesPackage;
-import com.bugsnag.BugsnagReactNative;
-import com.chirag.RNMail.RNMail;
+import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.krazylabs.OpenAppSettingsPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.peel.react.TcpSocketsModule;
-import com.reactlibrary.DiskletPackage;
-import com.reactnativecommunity.art.ARTPackage;
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.reactnativecommunity.webview.RNCWebViewPackage;
-import com.reactnativecomponent.splashscreen.RCTSplashScreenPackage;
-import com.rnfs.RNFSPackage;
-import com.rt2zz.reactnativecontacts.ReactNativeContacts;
-import com.zmxv.RNSound.RNSoundPackage;
-import io.fixd.rctlocale.RCTLocalePackage;
-import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
-import io.invertase.firebase.database.RNFirebaseDatabasePackage;
-import java.util.Arrays;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import org.reactnative.camera.RNCameraPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -48,33 +24,11 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          return Arrays.<ReactPackage>asList(
-              new MainReactPackage(),
-              new ARTPackage(),
-              new AsyncStoragePackage(),
-              new DiskletPackage(),
-              new RNCWebViewPackage(),
-              new OpenAppSettingsPackage(),
-              BugsnagReactNative.getPackage(),
-              new RNFirebasePackage(),
-              new RNFirebaseAnalyticsPackage(),
-              new RNFirebaseDatabasePackage(),
-              new RNMail(),
-              new RCTSplashScreenPackage(),
-              new AbcCoreJsUiPackage(),
-              new RNSoundPackage(),
-              new RNSharePackage(),
-              new RandomBytesPackage(),
-              new RNFastCryptoPackage(),
-              new VectorIconsPackage(),
-              new TcpSocketsModule(),
-              new LinearGradientPackage(),
-              new RNFSPackage(),
-              new RNDeviceInfo(),
-              new ReactNativeContacts(),
-              new RNCameraPackage(),
-              new RCTLocalePackage(),
-              new ExtraDimensionsPackage());
+          @SuppressWarnings("UnnecessaryLocalVariable")
+          List<ReactPackage> packages = new PackageList(this).getPackages();
+          // Packages that cannot be autolinked yet can be added manually here, for example:
+          // packages.add(new MyReactNativePackage());
+          return packages;
         }
 
         @Override
@@ -91,19 +45,51 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
     Context context = getApplicationContext();
 
     // Disable RTL
     I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
     sharedI18nUtilInstance.allowRTL(context, false);
 
-    BugsnagReactNative.start(this);
     SoLoader.init(this, /* native exopackage */ false);
+    initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
 
     WebView.setWebContentsDebuggingEnabled(true);
 
     // Background task:
-    MessagesWorker.ensureScheduled(context);
+    // MessagesWorker.ensureScheduled(context);
     // MessagesWorker.testRun(context);
+  }
+
+  /**
+   * Loads Flipper in React Native templates. Call this in the onCreate method with something like
+   * initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+   *
+   * @param context
+   * @param reactInstanceManager
+   */
+  private static void initializeFlipper(
+      Context context, ReactInstanceManager reactInstanceManager) {
+    if (BuildConfig.DEBUG) {
+      try {
+        /*
+         We use reflection here to pick up the class that initializes Flipper,
+        since Flipper library is not available in release mode
+        */
+        Class<?> aClass = Class.forName("com.rndiffapp.ReactNativeFlipper");
+        aClass
+            .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
+            .invoke(null, context, reactInstanceManager);
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+      } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        e.printStackTrace();
+      } catch (InvocationTargetException e) {
+        e.printStackTrace();
+      }
+    }
   }
 }

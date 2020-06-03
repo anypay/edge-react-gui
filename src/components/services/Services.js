@@ -5,7 +5,7 @@ import { makeReactNativeDisklet } from 'disklet'
 import { type EdgeContext } from 'edge-core-js/types'
 import React, { PureComponent } from 'react'
 import DeviceInfo from 'react-native-device-info'
-import Locale from 'react-native-locale'
+// import Locale from 'react-native-locale'
 import { MenuProvider } from 'react-native-popup-menu'
 import { Provider } from 'react-redux'
 import { type Store, applyMiddleware, compose, createStore } from 'redux'
@@ -13,7 +13,7 @@ import thunk from 'redux-thunk'
 
 import ENV from '../../../env.json'
 import { loadDeviceReferral } from '../../actions/DeviceReferralActions.js'
-import { setIntlLocale } from '../../locales/intl.js'
+// import { setIntlLocale } from '../../locales/intl.js'
 import { selectLocale } from '../../locales/strings.js'
 import { rootReducer } from '../../reducers/RootReducer.js'
 import { type Action } from '../../types/reduxActions.js'
@@ -69,7 +69,7 @@ export class Services extends PureComponent<Props> {
 
   componentDidMount() {
     this.dispatch(loadDeviceReferral())
-    setIntlLocale(Locale.constants())
+    // setIntlLocale(Locale.constants())
     selectLocale(DeviceInfo.getDeviceLocale())
   }
 
