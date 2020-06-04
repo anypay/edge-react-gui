@@ -265,6 +265,8 @@ const strings = {
   settings_promotion_device_currencies: 'New accounts will have wallets for: %s',
   settings_promotion_account_normal: 'This account was created normally.',
   settings_promotion_account_installer: 'This account was created via %s.',
+  settings_notifications: 'Notifications',
+  settings_currency_notifications: '%s Notifications',
   string_cancel_cap: 'Cancel',
   string_cancel: 'CANCEL',
   string_ok_cap: 'OK',

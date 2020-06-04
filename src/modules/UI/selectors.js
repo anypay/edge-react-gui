@@ -46,6 +46,27 @@ export const getActiveWalletIds = (state: State): Array<string> => {
   return activeWalletIds
 }
 
+export const getActiveWalletCurrencyCodes = (state: State) => {
+  const ids = getActiveWalletIds(state)
+  const currencyCodesMap = ids.reduce((map, id) => {
+    const wallet = getWallet(state, id)
+    if (!wallet) return map
+
+    map[wallet.currencyCode] = true
+    return map
+  }, {})
+  const currencyCodes: Array<string> = Object.keys(currencyCodesMap)
+  return currencyCodes
+}
+
+export const getActiveWalletCurrencyInfos = (state: State) => {
+  const activeCurrencyCodes = getActiveWalletCurrencyCodes(state)
+  const currencyInfos = Object.values(state.core.account.currencyConfig)
+    .map(config => config.currencyInfo)
+    .filter(info => activeCurrencyCodes.includes(info.currencyCode))
+  return currencyInfos
+}
+
 export const getWalletLoadingPercent = (state: State) => {
   const walletsForProgress = state.ui.wallets.walletLoadingProgress
   const walletIds = Object.keys(walletsForProgress)
